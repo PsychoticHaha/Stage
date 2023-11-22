@@ -1,0 +1,132 @@
+body {
+  margin: 0;
+  background-color: white;
+}
+body .parent {
+  height: 100vh;
+  background-color: blanchedalmond;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+body .parent .cadre1 {
+  background-color: rosybrown;
+  width: 20%;
+}
+body .parent .cadre1 .text {
+  color: black;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 20px;
+  margin: 20px;
+  text-align: center;
+}
+body .parent .cadre2 {
+  background-color: lightblue;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+body .parent .cadre2 .one {
+  background-color: lightskyblue;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+body .parent .cadre2 .one .arrow {
+  background-image: url(image/arrow.svg);
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+}
+body .parent .cadre2 .one ul {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  gap: 8px;
+  margin-left: 50px;
+  width: 100%;
+  height: auto;
+  padding: 0;
+}
+body .parent .cadre2 .one ul li {
+  display: flex;
+}
+body .parent .cadre2 .one ul li a {
+  text-decoration: none;
+  color: white;
+}
+body .parent .cadre2 .one ul li:not(:last-child):after {
+  content: "";
+  background-image: url(image/arrow.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 20px;
+  height: 20px;
+}
+body .parent .cadre2 .two {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: row;
+}
+body .parent .cadre2 .two .folder {
+  width: 20%;
+  height: 20%;
+  color: white;
+}
+body .parent .cadre2 .two .folder .icon {
+  background-image: url(image/icon.png);
+  width: 80%;
+  height: 80%;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+body .parent .cadre2 .two .image {
+  width: 20%;
+  height: 20%;
+  color: white;
+}
+body .parent .cadre2 .two .image .icon2 {
+  background-image: url(image/icon.png);
+  width: 80%;
+  height: 80%;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+body .parent .cadre2 .two .file {
+  width: 20%;
+  height: 20%;
+  color: white;
+}
+body .parent .cadre2 .two .file .icon3 {
+  background-image: url(image/icon.png);
+  width: 80%;
+  height: 80%;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+body .parent .cadre2 .two .image2 {
+  width: 20%;
+  height: 20%;
+  color: white;
+}
+body .parent .cadre2 .two .image2 .icon4 {
+  background-image: url(image/icon.png);
+  width: 80%;
+  height: 80%;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+body .parent .cadre2 .two .video {
+  width: 20%;
+  height: 20%;
+  color: white;
+}
+body .parent .cadre2 .two .video .icon5 {
+  background-image: url(image/icon.png);
+  width: 80%;
+  height: 80%;
+  background-size: contain;
+  background-repeat: no-repeat;
+}/*# sourceMappingURL=style.css.map */

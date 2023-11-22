@@ -1,0 +1,165 @@
+body {
+  margin: 0;
+  background-color: white;
+
+  .parent {
+    height: 100vh;
+    background-color: blanchedalmond;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+
+    .cadre1 {
+      background-color: rosybrown;
+      width: 20%;
+
+      .text {
+        color: black;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 20px;
+        margin: 20px;
+        text-align: center;
+      }
+    }
+
+    .cadre2 {
+      background-color: lightblue;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+
+      .one {
+        background-color: lightskyblue;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+
+        .arrow {
+          background-image: url(image/arrow.svg);
+          background-size: contain;
+          width: 20px;
+          height: 20px;
+
+        }
+
+        ul {
+          display: flex;
+          flex-direction: row;
+          list-style: none;
+          gap: 8px;
+          margin-left: 50px;
+          width: 100%;
+          height: auto;
+          padding: 0;
+
+          li {
+            display: flex;
+
+            a {
+              text-decoration: none;
+              color: white;
+            }
+
+            &:not(:last-child) {
+              &:after {
+                content: "";
+                background-image: url(image/arrow.svg);
+                background-size: contain;
+                background-repeat: no-repeat;
+                width: 20px;
+                height: 20px;
+              }
+            }
+          }
+        }
+
+      }
+
+      .two {
+        flex: 1;
+        padding: 40px;
+        display: flex;
+        flex-direction: row;
+
+        .folder {
+          width: 20%;
+          height: 20%;
+          color: white;
+
+
+          .icon {
+            background-image: url(image/icon.png);
+            width: 80%;
+            height: 80%;
+            background-size: contain;
+            background-repeat: no-repeat;
+
+          }
+        }
+
+        .image {
+          width: 20%;
+          height: 20%;
+          color: white;
+
+          .icon2 {
+            background-image: url(image/icon.png);
+            width: 80%;
+            height: 80%;
+            background-size: contain;
+            background-repeat: no-repeat;
+
+          }
+        }
+
+        .file {
+          width: 20%;
+          height: 20%;
+          color: white;
+
+          .icon3 {
+            background-image: url(image/icon.png);
+            width: 80%;
+            height: 80%;
+            background-size: contain;
+            background-repeat: no-repeat;
+          }
+        }
+
+        .image2 {
+          width: 20%;
+          height: 20%;
+          color: white;
+
+          .icon4 {
+            background-image: url(image/icon.png);
+            width: 80%;
+            height: 80%;
+            background-size: contain;
+            background-repeat: no-repeat;
+          }
+        }
+
+        .video {
+          width: 20%;
+          height: 20%;
+          color: white;
+
+          .icon5 {
+            background-image: url(image/icon.png);
+            width: 80%;
+            height: 80%;
+            background-size: contain;
+            background-repeat: no-repeat;
+
+          }
+        }
+
+      }
+
+    }
+
+  }
+
+}

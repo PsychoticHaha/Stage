@@ -1,0 +1,195 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+}
+
+header {
+  width: 100%;
+  height: 50px;
+  background-color: red;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  .logo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: max(25%, 300px);
+    min-width: 200px;
+    max-width: 300px;
+    background-color: yellow;
+
+    .logo-img {
+      width: 20%;
+      height: 50px;
+      background-image: url('../svgs/bell.svg');
+      background-color: green;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+  }
+}
+
+main {
+  display: flex;
+  width: 100%;
+  height: calc(100% - 50px);
+  background-color: green;
+
+  .left {
+    width: max(25%, 300px);
+    min-width: 200px;
+    max-width: 300px;
+    background-color: purple;
+
+    // Type d'accès (public ou privé)
+    .access-type {
+      display: flex;
+      align-items: center;
+      background-color: tomato;
+      margin-top: 50px;
+      padding: 10px 0;
+      cursor: pointer;
+    }
+
+    .icon {
+      width: 30px;
+      height: 30px;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+
+    // Icon for the public folder
+    .public {
+      .icon {
+        background-image: url('../svgs/lock.svg');
+      }
+    }
+
+    // Icon for the public folder
+    .private {
+      .icon {
+        background-image: url('../svgs/lock.svg');
+      }
+    }
+  }
+
+  .right {
+    flex: 1;
+    background-color: gray;
+
+    .navigation {
+      width: 100%;
+      height: 50px;
+      background-color: yellowgreen;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+
+      .folder-name {
+        min-width: 100px;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        border-radius: 10px;
+        background-color: #fff;
+
+        .arrow {
+          width: 20px;
+          height: 20px;
+          background-image: url('../svgs/arrow.svg');
+        }
+      }
+    }
+
+    .body {
+      height: calc(100% - 100px);
+      background-color: seagreen;
+      display: flex;
+      flex-direction: column;
+      .head{
+        display: flex;
+        justify-content: space-around;
+        div{
+          width: 30%;
+          padding: 5px;
+          background-color: #fff;
+        }
+      }
+      .content{
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        
+        .single-file{
+          display: flex;
+          justify-content: space-around;
+          padding: 10px 0;
+          background-color: lightgray;
+          border: 1px solid white;
+          div{
+            width: 30%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            .check{
+              height: 18px;
+              width: 18px;
+              cursor: pointer;
+            }
+          }
+          .file-action{
+            display: flex;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    .actions {
+      width: 98%;
+      height: 50px;
+      display: flex;  
+      align-items: center;
+      gap: 20px;
+      padding-left: 20px;
+      background-color: yellowgreen;
+      .icon{
+        width: 50px;
+        height: 40px;
+        // background-color: red;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: 50% 50%;
+        transition: 0.2s;
+        border-radius: 5px;
+        cursor: pointer;
+        &.new-folder{
+          background-image: url('../svgs/add-folder.svg');
+        }
+        &.download{
+          background-image: url('../svgs/download.svg');
+        }
+        &.upload{
+          background-image: url('../svgs/upload-filled.svg');
+        }
+        &.delete{
+          background-image: url('../svgs/trash.svg');
+          background-size: 70%;
+        }
+        &:hover{
+          background-color: #fff;
+        }
+      }
+    }
+  }
+}

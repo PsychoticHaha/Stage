@@ -1,0 +1,175 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+}
+
+header {
+  width: 100%;
+  height: 50px;
+  background-color: red;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+header .logo {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: max(25%, 300px);
+  min-width: 200px;
+  max-width: 300px;
+  background-color: yellow;
+}
+header .logo .logo-img {
+  width: 20%;
+  height: 50px;
+  background-image: url("../svgs/bell.svg");
+  background-color: green;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+main {
+  display: flex;
+  width: 100%;
+  height: calc(100% - 50px);
+  background-color: green;
+}
+main .left {
+  width: max(25%, 300px);
+  min-width: 200px;
+  max-width: 300px;
+  background-color: purple;
+}
+main .left .access-type {
+  display: flex;
+  align-items: center;
+  background-color: tomato;
+  margin-top: 50px;
+  padding: 10px 0;
+  cursor: pointer;
+}
+main .left .icon {
+  width: 30px;
+  height: 30px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+main .left .public .icon {
+  background-image: url("../svgs/lock.svg");
+}
+main .left .private .icon {
+  background-image: url("../svgs/lock.svg");
+}
+main .right {
+  flex: 1;
+  background-color: gray;
+}
+main .right .navigation {
+  width: 100%;
+  height: 50px;
+  background-color: yellowgreen;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+main .right .navigation .folder-name {
+  min-width: 100px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  border-radius: 10px;
+  background-color: #fff;
+}
+main .right .navigation .folder-name .arrow {
+  width: 20px;
+  height: 20px;
+  background-image: url("../svgs/arrow.svg");
+}
+main .right .body {
+  height: calc(100% - 100px);
+  background-color: seagreen;
+  display: flex;
+  flex-direction: column;
+}
+main .right .body .head {
+  display: flex;
+  justify-content: space-around;
+}
+main .right .body .head div {
+  width: 30%;
+  padding: 5px;
+  background-color: #fff;
+}
+main .right .body .content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+main .right .body .content .single-file {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  background-color: lightgray;
+  border: 1px solid white;
+}
+main .right .body .content .single-file div {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+main .right .body .content .single-file div .check {
+  height: 18px;
+  width: 18px;
+  cursor: pointer;
+}
+main .right .body .content .single-file .file-action {
+  display: flex;
+  cursor: pointer;
+}
+main .right .actions {
+  width: 98%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-left: 20px;
+  background-color: yellowgreen;
+}
+main .right .actions .icon {
+  width: 50px;
+  height: 40px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 50% 50%;
+  transition: 0.2s;
+  border-radius: 5px;
+  cursor: pointer;
+}
+main .right .actions .icon.new-folder {
+  background-image: url("../svgs/add-folder.svg");
+}
+main .right .actions .icon.download {
+  background-image: url("../svgs/download.svg");
+}
+main .right .actions .icon.upload {
+  background-image: url("../svgs/upload-filled.svg");
+}
+main .right .actions .icon.delete {
+  background-image: url("../svgs/trash.svg");
+  background-size: 70%;
+}
+main .right .actions .icon:hover {
+  background-color: #fff;
+}/*# sourceMappingURL=home.css.map */
