@@ -1,20 +1,12 @@
-* {
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  width: 100vw;
-  height: 100vh;
-}
-
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap");
 header {
   width: 100%;
   height: 50px;
-  background-color: red;
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  border-bottom: 1px solid #555;
+  background-color: #1E3231;
 }
 header .logo {
   display: flex;
@@ -23,36 +15,89 @@ header .logo {
   width: max(25%, 300px);
   min-width: 200px;
   max-width: 300px;
-  background-color: yellow;
+  margin-left: 30px;
+  color: #F5F5F5;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
 }
 header .logo .logo-img {
   width: 20%;
   height: 50px;
-  background-image: url("../svgs/bell.svg");
-  background-color: green;
+  background-image: url("../svgs/square-share-nodes.svg");
   background-size: contain;
   background-repeat: no-repeat;
+}
+header .search {
+  height: 80%;
+  width: 40%;
+  min-width: 300px;
+  margin-left: 30px;
+}
+header .search .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: #ececec;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  overflow: hidden;
+}
+header .search .search-icon {
+  width: 30px;
+  height: 30px;
+  background-image: url("../svgs/search.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+header .search input {
+  height: 100%;
+  width: calc(100% - 40px);
+  font-size: 15px;
+  outline: none;
+  border: none;
+  background-color: #ececec;
 }
 
 main {
   display: flex;
   width: 100%;
-  height: calc(100% - 50px);
-  background-color: green;
+  height: calc(100% - 52.5px);
+  font-family: "Montserrat", sans-serif;
 }
 main .left {
   width: max(25%, 300px);
   min-width: 200px;
-  max-width: 300px;
-  background-color: purple;
+  max-width: 250px;
+  background-color: #ebebeb;
+  padding-top: 50px;
+  border-right: 1px solid #ccc;
+}
+main .left .title {
+  background-color: #dbdada;
+  padding: 10px 0;
 }
 main .left .access-type {
   display: flex;
   align-items: center;
-  background-color: tomato;
-  margin-top: 50px;
+  background-color: #505186;
+  color: #e8e8e8;
+  margin-top: 20px;
   padding: 10px 0;
   cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  gap: 20px;
+  padding-left: 10px;
+  transition: 0.2s;
+}
+main .left .access-type.active {
+  background-color: #70B77E;
+}
+main .left .access-type:hover {
+  background-color: #777;
+  color: #F5F5F5;
 }
 main .left .icon {
   width: 30px;
@@ -61,26 +106,25 @@ main .left .icon {
   background-repeat: no-repeat;
 }
 main .left .public .icon {
-  background-image: url("../svgs/lock.svg");
+  background-image: url("../svgs/folder-public-open.svg");
 }
 main .left .private .icon {
-  background-image: url("../svgs/lock.svg");
+  background-image: url("../svgs/folder-admin-open.svg");
 }
 main .right {
   flex: 1;
-  background-color: gray;
 }
 main .right .navigation {
-  width: 100%;
+  width: 99%;
   height: 50px;
-  background-color: yellowgreen;
+  background-color: #1E3231;
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
   display: flex;
   align-items: center;
   gap: 10px;
-  cursor: pointer;
+  padding-left: 10px;
 }
 main .right .navigation .folder-name {
   min-width: 100px;
@@ -90,6 +134,11 @@ main .right .navigation .folder-name {
   gap: 5px;
   border-radius: 10px;
   background-color: #fff;
+  transition: 0.2s;
+  cursor: pointer;
+}
+main .right .navigation .folder-name:hover {
+  background-color: #ddd;
 }
 main .right .navigation .folder-name .arrow {
   width: 20px;
@@ -98,13 +147,14 @@ main .right .navigation .folder-name .arrow {
 }
 main .right .body {
   height: calc(100% - 100px);
-  background-color: seagreen;
   display: flex;
   flex-direction: column;
+  padding-left: 10px;
 }
 main .right .body .head {
   display: flex;
   justify-content: space-around;
+  border-bottom: 1px solid #000;
 }
 main .right .body .head div {
   width: 30%;
@@ -114,29 +164,65 @@ main .right .body .head div {
 main .right .body .content {
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
   gap: 2px;
 }
 main .right .body .content .single-file {
   display: flex;
   justify-content: space-around;
+  align-items: center;
   padding: 10px 0;
-  background-color: lightgray;
+  background-color: #ececec;
   border: 1px solid white;
 }
-main .right .body .content .single-file div {
+main .right .body .content .single-file .name, main .right .body .content .single-file .add-date, main .right .body .content .single-file .file-action {
   width: 30%;
   display: flex;
   align-items: center;
   gap: 10px;
 }
-main .right .body .content .single-file div .check {
+main .right .body .content .single-file .name .check, main .right .body .content .single-file .add-date .check, main .right .body .content .single-file .file-action .check {
   height: 18px;
   width: 18px;
   cursor: pointer;
 }
 main .right .body .content .single-file .file-action {
   display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 5px 0;
+  gap: 20px;
+  opacity: 0;
+  transition: 0.3s;
+}
+main .right .body .content .single-file .file-action div {
+  background-color: white;
+  border-radius: 50%;
+  height: 100%;
+  width: 10%;
+  padding: 7px 5px;
+  background-size: 60%;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
   cursor: pointer;
+}
+main .right .body .content .single-file .file-action div.rename {
+  background-image: url("../svgs/edit-3.svg");
+}
+main .right .body .content .single-file .file-action div.delete {
+  background-image: url("../svgs/trash.svg");
+}
+main .right .body .content .single-file .file-action div.download {
+  background-image: url("../svgs/download-menu.svg");
+}
+main .right .body .content .single-file .file-action div:hover {
+  background-color: #9b9b9b;
+}
+main .right .body .content .single-file:hover {
+  background-color: #e0e0e0;
+}
+main .right .body .content .single-file:hover .file-action {
+  opacity: 1;
 }
 main .right .actions {
   width: 98%;
@@ -145,7 +231,7 @@ main .right .actions {
   align-items: center;
   gap: 20px;
   padding-left: 20px;
-  background-color: yellowgreen;
+  background-color: #1E3231;
 }
 main .right .actions .icon {
   width: 50px;
@@ -172,4 +258,133 @@ main .right .actions .icon.delete {
 }
 main .right .actions .icon:hover {
   background-color: #fff;
+}
+
+.one-context-menu {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  z-index: 100;
+  background-color: #aaa;
+  border-bottom: 1px solid #ccc;
+}
+.one-context-menu .item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 40px;
+  transition: 0.3s;
+  font-size: 15px;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+}
+.one-context-menu .item .icon {
+  width: 15%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: 50%;
+  background-position: 50% 50%;
+}
+.one-context-menu .item:hover {
+  background-color: #323232;
+  color: #e8e8e8;
+}
+.one-context-menu .download-file .icon {
+  background-image: url("../svgs/download-menu.svg");
+}
+.one-context-menu .create-folder .icon {
+  background-image: url("../svgs/folder-plus.svg");
+}
+.one-context-menu .delete-file .icon {
+  background-image: url("../svgs/trash-menu.svg");
+}
+.one-context-menu .rename-file .icon {
+  background-image: url("../svgs/edit-menu.svg");
+}
+
+.modal-container {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.9333333333);
+  display: none;
+}
+.modal-container.show {
+  display: flex;
+}
+.modal-container .rename-modal {
+  width: 300px;
+  height: 100px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+}
+.modal-container .rename-modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-family: "Montserrat", sans-serif;
+}
+.modal-container .rename-modal form #new-name {
+  height: 30px;
+  font-style: 15px;
+  border: none;
+  outline: none;
+  transition: 0.2s;
+  border-bottom: 2px solid #000;
+}
+.modal-container .rename-modal form #new-name:focus {
+  border-color: #0051ff;
+}
+.modal-container .rename-modal form .confirm-btns {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: space-around;
+}
+.modal-container .rename-modal form .confirm-btns input {
+  width: 40%;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  transition: 0.2s;
+  cursor: pointer;
+}
+.modal-container .rename-modal form .confirm-btns #yes {
+  background-color: green;
+}
+.modal-container .rename-modal form .confirm-btns #yes:hover {
+  background-color: #015801;
+  color: #e8e8e8;
+}
+.modal-container .rename-modal form .confirm-btns #no {
+  background-color: tomato;
+}
+.modal-container .rename-modal form .confirm-btns #no:hover {
+  background-color: #a73c29;
+  color: #e8e8e8;
+}
+.modal-container .rename-modal form .btns {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  height: 30px;
+}
+.modal-container .rename-modal form .btns input {
+  width: 70px;
+  border: 1px solid #000;
+  border-radius: 7px;
+  cursor: pointer;
+}
+.modal-container .rename-modal form .btns input#ok {
+  background-color: #0051ff;
+  color: #fff;
 }/*# sourceMappingURL=home.css.map */

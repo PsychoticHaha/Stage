@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body style="height: 100vh;background-color: red;">
+  <div class="context" style="display: none; background-color: #fff;">
+    Hello, i'm the context menu.
+  </div>
+  <script>
+    document.body.addEventListener('contextmenu',(event)=>{
+      event.preventDefault();
+      const menu= document.querySelector('.context');
+      menu.style = "display:block";
+      if (event.button == 2) {
+        console.log('right click');
+      }
+    })
+  </script>
+  <!-- This test file is about showing a context menu on right click -->
+</body>
+</html>

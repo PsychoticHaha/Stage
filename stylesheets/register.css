@@ -1,0 +1,65 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  height: 100vh;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #1E3231;
+  width: min(300px, 20%);
+  padding: 30px;
+}
+form label {
+  color: #e8e8e8;
+  font-family: sans-serif;
+}
+form input {
+  height: 30px;
+  font-size: 17px;
+}
+form #register {
+  width: 50%;
+  align-self: center;
+  cursor: pointer;
+  background-color: #1d6461;
+  color: #e8e8e8;
+  border: 1px dashed #ccc;
+}
+form #register:hover {
+  background-color: #2d9792;
+  color: #000;
+  box-shadow: 1px 5px 10px #1d6461;
+}
+
+.password {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+}
+.password input {
+  width: 90%;
+  border: none;
+}
+.password span {
+  height: 30px;
+  width: 10%;
+  background-repeat: no-repeat;
+  background-size: 80%;
+  background-position: 50% 50%;
+  background-image: url("../svgs/eye.svg");
+  cursor: pointer;
+}
+.password span.hide {
+  background-image: url("../svgs/eye-slash.svg");
+}/*# sourceMappingURL=register.css.map */

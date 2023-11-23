@@ -1,0 +1,99 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#logout-form {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+}
+#logout-form #logout {
+  height: 50px;
+  width: 100px;
+  cursor: pointer;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  border: 1px solid black;
+}
+.container .head {
+  height: 50px;
+  display: flex;
+  background-color: #1E3231;
+  color: #eee;
+  font-family: sans-serif;
+  justify-content: space-between;
+  align-items: center;
+}
+.container .head div {
+  width: 33%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  padding-left: 20px;
+}
+.container .content {
+  height: 75vh;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.single-account {
+  display: flex;
+  border: 1px solid #ccc;
+  justify-content: space-between;
+  align-items: center;
+}
+.single-account:hover {
+  background-color: #e4e3e3;
+}
+.single-account:hover .actions {
+  opacity: 1;
+}
+.single-account .email, .single-account .date {
+  width: 33%;
+  padding: 10px 0 10px 10px;
+}
+.single-account .actions {
+  width: 33%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+  transition: 0.3s;
+  opacity: 0;
+}
+.single-account .actions div {
+  background-repeat: no-repeat;
+  background-size: 20%;
+  background-position: 50% 50%;
+  height: 90%;
+  width: 30%;
+  min-width: 50px;
+  border-radius: 5px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+.single-account .actions .accept {
+  background-image: url("../svgs/check.svg");
+  background-color: #02bd02;
+}
+.single-account .actions .accept:hover {
+  background-color: #029102;
+}
+.single-account .actions .delete {
+  background-image: url("../svgs/cross.svg");
+  background-color: #fa4f31;
+}
+.single-account .actions .delete:hover {
+  background-color: #bb3d27;
+}/*# sourceMappingURL=dashboard.css.map */

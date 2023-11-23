@@ -1,20 +1,14 @@
-* {
-  margin: 0;
-  padding: 0;
-}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
 
-body {
-  width: 100vw;
-  height: 100vh;
-}
-
+// Main Page Design
 header {
   width: 100%;
   height: 50px;
-  background-color: red;
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  border-bottom: 1px solid #555;
+  background-color: #1E3231;
 
   .logo {
     display: flex;
@@ -23,15 +17,53 @@ header {
     width: max(25%, 300px);
     min-width: 200px;
     max-width: 300px;
-    background-color: yellow;
+    margin-left: 30px;
+    color: #F5F5F5;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
 
     .logo-img {
       width: 20%;
       height: 50px;
-      background-image: url('../svgs/bell.svg');
-      background-color: green;
+      background-image: url('../svgs/square-share-nodes.svg');
       background-size: contain;
       background-repeat: no-repeat;
+    }
+  }
+
+  .search {
+    height: 80%;
+    width: 40%;
+    min-width: 300px;
+    margin-left: 30px;
+
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      background-color: #ececec;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+      overflow: hidden;
+    }
+
+    .search-icon {
+      width: 30px;
+      height: 30px;
+      background-image: url('../svgs/search.svg');
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+
+    input {
+      height: 100%;
+      width: calc(100% - 40px);
+      font-size: 15px;
+      outline: none;
+      border: none;
+      background-color: #ececec;
     }
   }
 }
@@ -39,23 +71,43 @@ header {
 main {
   display: flex;
   width: 100%;
-  height: calc(100% - 50px);
-  background-color: green;
+  height: calc(100% - 52.5px);
+  font-family: 'Montserrat', sans-serif;
 
   .left {
     width: max(25%, 300px);
     min-width: 200px;
-    max-width: 300px;
-    background-color: purple;
+    max-width: 250px;
+    background-color: #ebebeb;
+    padding-top: 50px;
+    border-right: 1px solid #ccc;
 
-    // Type d'accès (public ou privé)
+    .title {
+      background-color: #dbdada;
+      padding: 10px 0;
+    }
+
+    // Buttons Type d'accès (public ou privé)
     .access-type {
       display: flex;
       align-items: center;
-      background-color: tomato;
-      margin-top: 50px;
+      background-color: #505186;
+      color: #e8e8e8;
+      margin-top: 20px;
       padding: 10px 0;
       cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      gap: 20px;
+      padding-left: 10px;
+      transition: 0.2s;
+      &.active{
+        background-color: #70B77E;
+      }
+      &:hover {
+        background-color: #777;
+        color: #F5F5F5;
+      }
     }
 
     .icon {
@@ -68,31 +120,30 @@ main {
     // Icon for the public folder
     .public {
       .icon {
-        background-image: url('../svgs/lock.svg');
+        background-image: url('../svgs/folder-public-open.svg');
       }
     }
 
     // Icon for the public folder
     .private {
       .icon {
-        background-image: url('../svgs/lock.svg');
+        background-image: url('../svgs/folder-admin-open.svg');
       }
     }
   }
 
   .right {
     flex: 1;
-    background-color: gray;
 
     .navigation {
-      width: 100%;
+      width: 99%;
       height: 50px;
-      background-color: yellowgreen;
+      background-color: #1E3231;
       user-select: none;
       display: flex;
       align-items: center;
       gap: 10px;
-      cursor: pointer;
+      padding-left: 10px;
 
       .folder-name {
         min-width: 100px;
@@ -102,6 +153,12 @@ main {
         gap: 5px;
         border-radius: 10px;
         background-color: #fff;
+        transition: 0.2s;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #ddd;
+        }
 
         .arrow {
           width: 20px;
@@ -113,43 +170,94 @@ main {
 
     .body {
       height: calc(100% - 100px);
-      background-color: seagreen;
       display: flex;
       flex-direction: column;
-      .head{
+      padding-left: 10px;
+
+      .head {
         display: flex;
         justify-content: space-around;
-        div{
+        border-bottom: 1px solid #000;
+
+        div {
           width: 30%;
           padding: 5px;
           background-color: #fff;
         }
       }
-      .content{
+
+      .content {
         display: flex;
         flex-direction: column;
+        overflow-y: scroll;
+        // position: relative;
         gap: 2px;
-        
-        .single-file{
+
+        .single-file {
           display: flex;
           justify-content: space-around;
+          align-items: center;
           padding: 10px 0;
-          background-color: lightgray;
+          background-color: #ececec;
           border: 1px solid white;
-          div{
+
+          // Name / Date / Actions
+          .name, .add-date, .file-action {
             width: 30%;
             display: flex;
             align-items: center;
             gap: 10px;
-            .check{
+
+            .check {
               height: 18px;
               width: 18px;
               cursor: pointer;
             }
           }
-          .file-action{
+
+          .file-action {
             display: flex;
-            cursor: pointer;
+            align-items: center;
+            height: 100%;
+            padding: 5px 0;
+            gap: 20px;
+            opacity: 0;
+            transition: 0.3s;
+
+            div {
+              background-color: white;
+              border-radius: 50%;
+              height: 100%;
+              width: 10%;
+              padding: 7px 5px;
+              background-size: 60%;
+              background-repeat: no-repeat;
+              background-position: 50% 50%;
+              cursor: pointer;
+
+              &.rename {
+                background-image: url('../svgs/edit-3.svg');
+              }
+
+              &.delete {
+                background-image: url('../svgs/trash.svg');
+              }
+              &.download{
+                background-image: url('../svgs/download-menu.svg');
+              }
+
+              &:hover {
+                background-color: #9b9b9b;
+              }
+            }
+          }
+
+          &:hover {
+            background-color: #e0e0e0;
+
+            .file-action {
+              opacity: 1;
+            }
           }
         }
       }
@@ -158,36 +266,194 @@ main {
     .actions {
       width: 98%;
       height: 50px;
-      display: flex;  
+      display: flex;
       align-items: center;
       gap: 20px;
       padding-left: 20px;
-      background-color: yellowgreen;
-      .icon{
+      background-color: #1E3231;
+
+      .icon {
         width: 50px;
         height: 40px;
-        // background-color: red;
         background-repeat: no-repeat;
         background-size: contain;
         background-position: 50% 50%;
         transition: 0.2s;
         border-radius: 5px;
         cursor: pointer;
-        &.new-folder{
+
+        &.new-folder {
           background-image: url('../svgs/add-folder.svg');
         }
-        &.download{
+
+        &.download {
           background-image: url('../svgs/download.svg');
         }
-        &.upload{
+
+        &.upload {
           background-image: url('../svgs/upload-filled.svg');
         }
-        &.delete{
+
+        &.delete {
           background-image: url('../svgs/trash.svg');
           background-size: 70%;
         }
-        &:hover{
+
+        &:hover {
           background-color: #fff;
+        }
+      }
+    }
+  }
+}
+
+// Context Menu for each single file
+.one-context-menu {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  z-index: 100;
+  background-color: #aaa;
+  border-bottom: 1px solid #ccc;
+
+  .item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    height: 40px;
+    transition: 0.3s;
+    font-size: 15px;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+
+    .icon {
+      width: 15%;
+      height: 100%;
+      background-repeat: no-repeat;
+      background-size: 50%;
+      background-position: 50% 50%;
+    }
+
+    &:hover {
+      background-color: #323232;
+      color: #e8e8e8;
+    }
+  }
+
+  .download-file .icon {
+    background-image: url('../svgs/download-menu.svg');
+  }
+
+  .create-folder .icon {
+    background-image: url('../svgs/folder-plus.svg');
+  }
+
+  .delete-file .icon {
+    background-image: url('../svgs/trash-menu.svg');
+  }
+
+  .rename-file .icon {
+    background-image: url('../svgs/edit-menu.svg');
+  }
+}
+
+// Modal / Dialog for file renaming and file deleting
+.modal-container {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000000ee;
+  display: none;
+
+  &.show {
+    display: flex;
+  }
+
+  .rename-modal {
+    width: 300px;
+    height: 100px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-family: 'Montserrat', sans-serif;
+
+      #new-name {
+        height: 30px;
+        font-style: 15px;
+        border: none;
+        outline: none;
+        transition: 0.2s;
+        border-bottom: 2px solid #000;
+
+        &:focus {
+          border-color: #0051ff;
+        }
+      }
+
+      .confirm-btns {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        justify-content: space-around;
+
+        input {
+          width: 40%;
+          border: none;
+          border-radius: 10px;
+          font-weight: 700;
+          transition: 0.2s;
+          cursor: pointer;
+        }
+
+        #yes {
+          background-color: green;
+
+          &:hover {
+            background-color: #015801;
+            color: #e8e8e8;
+          }
+        }
+
+        #no {
+          background-color: tomato;
+
+          &:hover {
+            background-color: #a73c29;
+            color: #e8e8e8;
+          }
+        }
+      }
+
+      .btns {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+
+        height: 30px;
+
+        input {
+          width: 70px;
+          border: 1px solid #000;
+          border-radius: 7px;
+          cursor: pointer;
+
+          &#ok {
+            background-color: #0051ff;
+            color: #fff;
+          }
         }
       }
     }

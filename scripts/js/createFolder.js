@@ -1,0 +1,1 @@
+const newFolderBtn = document.querySelector('.actions .new-folder');
