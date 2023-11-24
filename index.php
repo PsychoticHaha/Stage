@@ -10,6 +10,9 @@
   </head>
 
   <body>
+    <div class="message-popup">
+    HAHAHAH ERROR
+    </div>
     <!-- HEADER -->
     <header class="header">
       <div class="logo">

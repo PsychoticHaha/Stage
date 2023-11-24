@@ -43,7 +43,7 @@ function renderMenu() {
   <div class="icon"></div>
   Rename file
   </div>
-  <div class="item create-folder">
+  <div class="item create-folder" onclick="toggleCreateFolderModal()">
     <div class="icon"></div>
     Create a new folder
   </div>`;
@@ -90,6 +90,11 @@ files.forEach(file => {
       file.appendChild(renderMenu());
       const contextMnuDiv = document.querySelector('.one-context-menu');
       contextMnuDiv.style = `top:${mouseY + 10}px;left:${mouseX + 10}px`;
+      if (newFolder_Menu_Btn) {
+        newFolder_Menu_Btn.addEventListener('click', () => {
+          toggleCreateFolderModal();
+        })
+      }
     } else {
       file.appendChild(renderMenu());
       const contextMnuDiv = document.querySelector('.one-context-menu');
