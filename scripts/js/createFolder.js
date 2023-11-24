@@ -29,32 +29,45 @@ function toggleCreateFolderModal() {
     createFolder();
   });
 }
+// Check if the folder name is a valid name using REGEX
+function isValidFolderName(str) {
+  const regex = /^[a-zA-Z0-9\-\_\s ]+$/;
+  return regex.test(str);
+}
 
-// Main function of Folder Creating using AJAX
+// Main REQUEST for Folder Creating using AJAX
 function createFolder() {
   const folderNameInput = document.querySelector('#new-name'),
     folderName = folderNameInput.value;
-  const url = 'scripts/php/createFolder.php';
-  const xhr = new XMLHttpRequest(),
-    params = 'folderName=' + folderName;
+  if (isValidFolderName(folderName)) {
+    const url = './../scripts/php/public/createFolder.php';
+    const xhr = new XMLHttpRequest(),
+      params = 'folderName=' + folderName;
 
-  xhr.open('POST', url, true);
-  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  xhr.onload = function () {
-    if (xhr.status == 200 && xhr.status < 300) {
-      const response = xhr.responseText;
-      console.log('Server Response: ', xhr.responseText);
-      if (response == 'Folder Created') {
-        // Show success message
-        folderNameInput.value = '';
-        toggleCreateFolderModal();
-      } else if (response == 'Folder Already exists') {
-        // Show error message
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = async function () {
+
+      if (xhr.status == 200) {
+        const response = JSON.parse(xhr.responseText);
+        if (response === "Folder Created" && response) {
+          // Show success message
+          renderPopupMsg('success', 'Folder created successfully');
+          folderNameInput.value = '';
+          toggleCreateFolderModal();
+        } else if (response === "Folder Already exists" && response) {
+          // Show error message
+          renderPopupMsg('error', 'This Folder Already exists, Choose another name');
+        }
+        console.log(typeof (response));
+        console.log('Server Response: ', xhr.responseText);
+      } else {
+        console.error('Error: ', xhr.statusText);
       }
-    } else {
-      console.error('Error: ', xhr.statusText);
     }
+    xhr.send(params);
+  } else {
+    renderPopupMsg('error', 'Error : Only letters, numbers, underscores and hyphens allowed ');
   }
-  xhr.send(params);
 
 }

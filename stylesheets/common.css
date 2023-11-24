@@ -1,32 +1,53 @@
-
 /* Common rules */
 * {
   margin: 0;
   padding: 0;
 }
-
 ::-webkit-scrollbar {
   width: 10px;
 }
-
 ::-webkit-scrollbar-thumb {
   background-color: #2d4d4b;
   border-radius: 25px;
 }
-
 body {
   width: 100vw;
   height: 100vh;
+  color: #000;
 }
-
 /* Message Popup */
-.message-popup{
+.message-popup {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   position: absolute;
   top: 10px;
   left: 40%;
   z-index: 200;
-  width: max(300px, 20%);
+  width: max(300px, fit-content);
+  padding: 0 10px;
+  min-width: 300px;
   height: 50px;
-  background-color: #00b400;
+  transition: 0.5s;
   color: #e8e8ee;
+  font-family: sans-serif;
+}
+.message-popup.success {
+  background-color: #00b400;
+}
+.message-popup.error {
+  background-color: #cc3a20;
+}
+.message-popup .close-btn {
+  text-align: center;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  font-size: min(20px, 5vmin);
+}
+.message-popup .close-btn:hover {
+  color: #000;
+}
+.message-popup.hide {
+  transform: translateY(-200%);
 }

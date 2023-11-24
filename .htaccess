@@ -1,0 +1,3 @@
+#Deny Listing Directory Permissions
+RewriteEngine On
+Options +Indexes

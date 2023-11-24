@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 
 // Main Page Design
 header {
@@ -101,9 +101,11 @@ main {
       gap: 20px;
       padding-left: 10px;
       transition: 0.2s;
-      &.active{
+
+      &.active {
         background-color: #70B77E;
       }
+
       &:hover {
         background-color: #777;
         color: #F5F5F5;
@@ -201,12 +203,14 @@ main {
           background-color: #ececec;
           border: 1px solid white;
 
-          // Name / Date / Actions
+          // Name / Date / Actions Content
           .name, .add-date, .file-action {
             width: 30%;
             display: flex;
             align-items: center;
             gap: 10px;
+            user-select: none;
+            cursor: pointer;
 
             .check {
               height: 18px;
@@ -242,7 +246,8 @@ main {
               &.delete {
                 background-image: url('../svgs/trash.svg');
               }
-              &.download{
+
+              &.download {
                 background-image: url('../svgs/download-menu.svg');
               }
 
@@ -454,6 +459,111 @@ main {
             background-color: #0051ff;
             color: #fff;
           }
+        }
+      }
+    }
+  }
+}
+
+// UPLOAD MODAL
+.modal-upload {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000000ee;
+  display: none;
+
+  &.show {
+    display: flex;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-family: 'Montserrat', sans-serif;
+    min-width: 300px;
+    min-height: 150px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+
+    .selected-files-list {
+      min-width: max(100%, fit-content);
+      max-width: 98vw;
+      min-height: 100px;
+      max-height: 50vh;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow-y: scroll;
+      background-color: #fff;
+
+      .item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 5px 0;
+        padding-left: 5px;
+        background-color: #ccc;
+
+        &:hover {
+          background-color: #888;
+        }
+
+        .close-btn {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 2px;
+          height: 20px;
+          width: 20px;
+          font-size: 40px;
+          transition: 0.3s;
+
+          cursor: pointer;
+
+          &:hover {
+            color: #f35;
+          }
+        }
+      }
+    }
+
+    .btns {
+      display: flex;
+      justify-content: flex-end;
+      gap: 20px;
+
+      button, div {
+        height: 30px;
+        width: 100px;
+        border: 1px solid #000;
+        border-radius: 7px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+
+        &#startUpload {
+          background-color: #0051ff;
+          color: #fff;
+
+          &:hover {
+            background-color: #00287e;
+          }
+        }
+
+      }
+      #cancelUpload {
+        border: 2px solid #dddada;
+
+        &:hover {
+          background-color: #ccc;
         }
       }
     }

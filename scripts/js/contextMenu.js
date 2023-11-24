@@ -37,11 +37,11 @@ function renderMenu() {
   </div>
   <div class="item delete-file">
   <div class="icon"></div>
-  Delete file
+  Delete
   </div>
   <div class="item rename-file">
   <div class="icon"></div>
-  Rename file
+  Rename
   </div>
   <div class="item create-folder" onclick="toggleCreateFolderModal()">
     <div class="icon"></div>
