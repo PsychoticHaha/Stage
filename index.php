@@ -96,9 +96,11 @@
         </div>
       </form>
     </div>
+    <script></script>
+    <script src="scripts/js/Modals.js" defer></script>
     <script src="scripts/js/renderFilesList.js" async></script>
-    <script src="scripts/js/contextmenu.js" async></script>
-    <script src="scripts/js/createFolder.js" async></script>
+    <script src="scripts/js/createFolder.js" defer></script>
+    <script src="scripts/js/deleteFolder.js" async></script>
     <script src="scripts/js/uploadFiles.js" async></script>
     <script src="scripts/js/common.js" defer></script>
   </body>

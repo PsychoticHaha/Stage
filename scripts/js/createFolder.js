@@ -7,9 +7,9 @@ newFolderBtn.addEventListener('click', () => {
 function toggleCreateFolderModal() {
   editModal.innerHTML =
     `<div class="rename-modal">
-    <form id="createFolder">
-      <label for="new-name" class="title">Name of the new folder :</label>
-      <input type="text" id="new-name" name="folderName" value="">
+    <form id="createFolder" class="rename-form">
+      <label for="folder-name" class="title">Name of the new folder :</label>
+      <input type="text" id="folder-name" class="new-name" name="folderName" value="">
       <div class="btns">
         <input type="submit" id="ok" value="Ok">
         <input type="reset" id="cancel-edit" value="Cancel">
@@ -18,6 +18,7 @@ function toggleCreateFolderModal() {
   </div>`;
   if (!editModal.classList.contains('show')) {
     editModal.classList.add('show');
+    document.getElementById('folder-name').focus();
   } else {
     editModal.classList.remove('show');
   }
@@ -37,7 +38,7 @@ function isValidFolderName(str) {
 
 // Main REQUEST for Folder Creating using AJAX
 function createFolder() {
-  const folderNameInput = document.querySelector('#new-name'),
+  const folderNameInput = document.querySelector('#folder-name'),
     folderName = folderNameInput.value;
   if (isValidFolderName(folderName)) {
     const url = './../scripts/php/public/createFolder.php';
@@ -51,6 +52,7 @@ function createFolder() {
       if (xhr.status == 200) {
         const response = JSON.parse(xhr.responseText);
         if (response === "Folder Created" && response) {
+          renderFileList();
           // Show success message
           renderPopupMsg('success', 'Folder created successfully');
           folderNameInput.value = '';
@@ -59,8 +61,6 @@ function createFolder() {
           // Show error message
           renderPopupMsg('error', 'This Folder Already exists, Choose another name');
         }
-        console.log(typeof (response));
-        console.log('Server Response: ', xhr.responseText);
       } else {
         console.error('Error: ', xhr.statusText);
       }

@@ -330,13 +330,13 @@ main .right .actions .icon:hover {
   padding: 20px;
   border-radius: 10px;
 }
-.modal-container .rename-modal form {
+.modal-container .rename-modal .rename-form {
   display: flex;
   flex-direction: column;
   gap: 10px;
   font-family: "Montserrat", sans-serif;
 }
-.modal-container .rename-modal form #new-name {
+.modal-container .rename-modal .rename-form .new-name {
   height: 30px;
   font-style: 15px;
   border: none;
@@ -344,16 +344,16 @@ main .right .actions .icon:hover {
   transition: 0.2s;
   border-bottom: 2px solid #000;
 }
-.modal-container .rename-modal form #new-name:focus {
+.modal-container .rename-modal .rename-form .new-name:focus {
   border-color: #0051ff;
 }
-.modal-container .rename-modal form .confirm-btns {
+.modal-container .rename-modal .rename-form .confirm-btns {
   width: 100%;
   height: 50px;
   display: flex;
   justify-content: space-around;
 }
-.modal-container .rename-modal form .confirm-btns input {
+.modal-container .rename-modal .rename-form .confirm-btns input {
   width: 40%;
   border: none;
   border-radius: 10px;
@@ -361,34 +361,34 @@ main .right .actions .icon:hover {
   transition: 0.2s;
   cursor: pointer;
 }
-.modal-container .rename-modal form .confirm-btns #yes {
+.modal-container .rename-modal .rename-form .confirm-btns #yes {
   background-color: green;
 }
-.modal-container .rename-modal form .confirm-btns #yes:hover {
+.modal-container .rename-modal .rename-form .confirm-btns #yes:hover {
   background-color: #015801;
   color: #e8e8e8;
 }
-.modal-container .rename-modal form .confirm-btns #no {
+.modal-container .rename-modal .rename-form .confirm-btns #no {
   background-color: tomato;
 }
-.modal-container .rename-modal form .confirm-btns #no:hover {
+.modal-container .rename-modal .rename-form .confirm-btns #no:hover {
   background-color: #a73c29;
   color: #e8e8e8;
 }
-.modal-container .rename-modal form .btns {
+.modal-container .rename-modal .rename-form .btns {
   width: 100%;
   display: flex;
   justify-content: flex-end;
   gap: 10px;
   height: 30px;
 }
-.modal-container .rename-modal form .btns input {
+.modal-container .rename-modal .rename-form .btns input {
   width: 70px;
   border: 1px solid #000;
   border-radius: 7px;
   cursor: pointer;
 }
-.modal-container .rename-modal form .btns input#ok {
+.modal-container .rename-modal .rename-form .btns input#ok {
   background-color: #0051ff;
   color: #fff;
 }
