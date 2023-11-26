@@ -1,7 +1,13 @@
-// This section Trigger the box-modal showing for file renaming
+// This section Trigger the box-modal showing for file renaming and deleting
 const editModal = document.querySelector('.modal-container');
 
-// This function manage the file deleting Modal
+
+/**
+ * Show / Hide Delete Confirmation Modal. *
+ * It pass the id and FolderName to the deleteFolder() function
+ * @param {string} [folderName=""] 
+ * @param {string} [id=""] 
+ */
 function toggleDeleteModal(id = "", folderName ="") {
   const folderId = id;
   
@@ -21,6 +27,10 @@ function toggleDeleteModal(id = "", folderName ="") {
     editModal.classList.remove('show');
   }
 }
+
+/**
+ * Show / Hide Rename Modal
+ */
 function toggleEditModal() {
   editModal.innerHTML =
     `<div class="rename-modal">
@@ -45,7 +55,9 @@ function toggleEditModal() {
   }
 }
 
-// This section render/create a context menu for each file in the files list
+/** 
+* This function render/create a context menu for each file in the files list
+*/
 function renderMenu() {
   const contextMenu = `
   <div class="item download-file">
@@ -69,7 +81,10 @@ function renderMenu() {
   _contextMenu.innerHTML = contextMenu;
   return _contextMenu;
 }
-// Function to remove the menu
+
+/** 
+ * Function to remove the context menu created by renderMenu()
+ */
 function removeMenu() {
   const contextMenuDiv = document.querySelector('.one-context-menu');
   if (contextMenuDiv) {

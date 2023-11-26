@@ -8,10 +8,11 @@ try {
     $path = $_SERVER['DOCUMENT_ROOT'] . '/files/public/' . $folderName .'/';
 
     // Deleting from the database
-    $sql = 'DELETE FROM folders WHERE id=:id';
+    $sql = 'DELETE FROM files WHERE id=:id';
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':id', $folder_id);
     $stmt->execute();
+    // Deleting physically
     deleteFolder($path);
     header('Content-Type: application/json');
     echo json_encode('Folder Deleted');

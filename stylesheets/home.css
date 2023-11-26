@@ -175,6 +175,11 @@ main .right .body .content .single-file {
   background-color: #ececec;
   border: 1px solid white;
 }
+main .right .body .content .single-file .folder-name {
+  width: 100%;
+  height: 100%;
+  padding: 5px 0;
+}
 main .right .body .content .single-file .name, main .right .body .content .single-file .add-date, main .right .body .content .single-file .file-action {
   width: 30%;
   display: flex;

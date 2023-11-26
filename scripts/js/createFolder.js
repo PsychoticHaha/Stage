@@ -4,6 +4,10 @@ newFolderBtn.addEventListener('click', () => {
   toggleCreateFolderModal();
 })
 
+
+/**
+ * This function Show / Hide the "Name" Prompt for the new folder
+ */
 function toggleCreateFolderModal() {
   editModal.innerHTML =
     `<div class="rename-modal">
@@ -11,7 +15,7 @@ function toggleCreateFolderModal() {
       <label for="folder-name" class="title">Name of the new folder :</label>
       <input type="text" id="folder-name" class="new-name" name="folderName" value="">
       <div class="btns">
-        <input type="submit" id="ok" value="Ok">
+        <input type="submit" id="ok" value="Create">
         <input type="reset" id="cancel-edit" value="Cancel">
       </div>
     </form>
@@ -22,52 +26,71 @@ function toggleCreateFolderModal() {
   } else {
     editModal.classList.remove('show');
   }
+  // Cancel Event Handler
   cancelEditBtn = document.getElementById('cancel-edit');
   cancelEditBtn.addEventListener('click', toggleEditModal);
+
+  // Create Folder Button event handler
   const createFolderForm = document.getElementById('createFolder');
   createFolderForm.addEventListener('submit', (e) => {
     e.preventDefault();
     createFolder();
   });
 }
-// Check if the folder name is a valid name using REGEX
+
+
+/** 
+ * Check if the folder name is a valid name using REGEX
+ * */
 function isValidFolderName(str) {
   const regex = /^[a-zA-Z0-9\-\_\s ]+$/;
   return regex.test(str);
 }
 
-// Main REQUEST for Folder Creating using AJAX
+
+/**
+ * Main API REQUEST for Folder Creating using FetchAPI
+ */
 function createFolder() {
   const folderNameInput = document.querySelector('#folder-name'),
     folderName = folderNameInput.value;
   if (isValidFolderName(folderName)) {
     const url = './../scripts/php/public/createFolder.php';
-    const xhr = new XMLHttpRequest(),
-      params = 'folderName=' + folderName;
-
-    xhr.open('POST', url, true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.onload = async function () {
-
-      if (xhr.status == 200) {
-        const response = JSON.parse(xhr.responseText);
-        if (response === "Folder Created" && response) {
-          renderFileList();
+  
+    const formData = new URLSearchParams();
+    formData.append('folderName', folderName);
+  
+    // Configure request object
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: formData
+    };
+  
+    // Send request to the URL
+    fetch(url, options)
+      .then(response => response.json())
+      .then(data => {
+        console.log('Server Response :', data);
+        if (data === "Folder Created") {
           // Show success message
           renderPopupMsg('success', 'Folder created successfully');
           folderNameInput.value = '';
           toggleCreateFolderModal();
-        } else if (response === "Folder Already exists" && response) {
+          renderFileList(actualPath());
+  
+        } else if (data === "Folder Already exists") {
           // Show error message
           renderPopupMsg('error', 'This Folder Already exists, Choose another name');
         }
-      } else {
-        console.error('Error: ', xhr.statusText);
-      }
-    }
-    xhr.send(params);
+  
+      })
+      .catch(error => {
+        console.error('Error :', error);
+      });
   } else {
     renderPopupMsg('error', 'Error : Only letters, numbers, underscores and hyphens allowed ');
   }
-
 }

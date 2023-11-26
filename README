@@ -1,0 +1,177 @@
+Conception :
+Dans les codes PHP, on utilise toujours les backslashs pour indiquer les répertoires
+Dans la base de données, on utilise toujours les slashs.
+Donc, on utilise la fonction str_replace avant d'insérer dans la base de données et
+avant de retourner une valeur récupérée depuis la base de données.
+
+# GESTION DE LA BASE DE DONNEES pour les FICHIERS et DOSSIERS :
+CREER UNE SEULE TABLE appelée "files" qui contient la liste de tous les fichiers et les dossiers
+Voici les colonnes de cette table : 
+id, name, path, date, updated_at, access_type, category, user_id, type
+
+Explication :
+id          = (INT) un chiffre auto-incrémenté et ajouté automatiquement
+name        = (VARCHAR) nom du fichier ou du dossier
+path        = (TEXT) chemin complet menant au fichier ou dossiers se situent directement dans le répertoire racine.
+rootContent = Pour vérifier si les fichiers ou dossiers 
+date        = (CURRENT TIMESTAMP) date de création du dossier ou date d'upload du fichier
+updated_at  = (CURRENT TIMESTAMP  on update ) date de la dernière fois où le fichier ou le dossier a été renomé.
+access_type = (VARCHAR) gère le type d'accès : public ou private (private pour les lignes "WHERE user_id IS NOT NULL");
+category    = (VARCHAR) file ou folder (ça définit si c'est un fichier ou un dossier) | C'est pour faciliter le maintien des sous-dossiers 
+user_id     = (INT) (NULLABLE) id de l'utilisateur qui a créé le dossier ou qui a uploadé le fichier 
+type        = (VARCHAR) (NULLABLE) extension du fichier(exemples : .mp3, .png, .svg, .mp4, etc.)
+
+##### VALEUR PAR DEFAUT de la colonne "path" = "/files/public/" (ça signifie que le répertoire par défaut pour tous les fichiers et tous les dossiers est le dossier public). On peut dire que c'est le répertoire racine pour tout contenu (fichiers et dossiers).
+Cela ne signifie pas que tout le monde pourra accéder à ces contenus. Seul les fichiers ou les dossiers ayant un access_type "public" seront accessibles à tout le monde.
+
+FONCTIONNEMENT DES SCRIPTS : 
+  Au chargement de la page, définir les variables de session :
+         $_SESSION['active_directory'] = '/files/public/';
+         $_SESSION['on_plateform'] = 'ok';
+         La première variable sert à conserver le path complet du dernier dossier ouvert.(Il est important de l'ajouter à chaque clic de fichier ou dossier)
+         Ces variables seront également utilisées plus tard dans les requêtes.  (but, sécurité et bon fonctionnement)
+  Faire un render fileList du dossier ROOT = ('/files/public/'), en appellant la fonction renderRootFileList(rootUrl) où rootUrl = ROOT;
+
+#Public Folders
+1 - Create Folder backend Script (fichie createFolder.php)
+
+    $parentDirectory = $_SESSION['active_directory'];
+    $folderName = $_POST['folderName'];
+    $name = $folderName; 
+    $path = $parentDirectory . $folderName;
+    if($_SESSION['private']){
+      $access_type = 'private'; // Don't forget to set $_SESSION['private'] when login with a private account
+      $user_id = $_SESSION['user_id']; //Don't forget to set $_SESSION['user_id'] When login as private account
+    } else {
+      $access_type = 'public';
+    } 
+    $category = 'folder';
+
+    ** Sauvegarder ces données
+
+    Créer le dossier physique via mkdir
+    mkdir($path);
+    ** Ne pas oublier de vérifier si le dossier existe déjà
+
+
+2 - Render Files List (and subfolders) (Read the contents of a folder)
+  Deux fonctions (Front) principales doivent gérer tout cela : openFolder(folderName) & renderFileList(folderPath);
+  
+  2-1 render ROOT FOLDER content : 
+    Ajouter un event handler au bouton "public /" de la barre de navigation  
+    Appeler une fonction renderRootFileList(rootUrl) qui appelle renderFileList(folderPath)
+
+  2-2 SUBFOLDER (QUAND L'UTILISATEUR CLIQUE SUR UN DOSSIER) | (ou sur un dossier de la barre de navigation)
+  ** En trois grandes étapes : récupérer le path depuis la BDD, faire une requête de la liste des contenus, afficher le résultat
+
+    //Front Fetch pour chaque dossier cliqué (function openFolder(folderName))  (fichier openFolder.js)
+    Quand l'utilisateur clique sur un dossier dans le fileList(ou sur un dossier de la barre de navigation) :
+    
+    Prendre le folderName via JS dans un callBack.
+    Transférer ce folderName au script openFolder(folderName)
+    openFolder(folderName) transfère le paramètre au backend via fetch()
+
+   // Dans BACKEND : (fichier getPath.php)
+    $folderName = $_POST['folderName'];     
+    SELECT * FROM files WHERE name = $folderName; (fetchASSOC)
+
+    // Traitement pour obtenir l'id et le path du folderName (dossier actuel)
+    foreach($folderInfo as $folderInfo){
+      $id = $folderInfo['id'];
+      $path = $folderInfo['path']. '/';
+
+    // SET the sessions active_directory and folder_id variables afin de les Utiliser dans les requêtes 
+      $_SESSION['active_directory'] = $path;
+      $_SESSION['folder_id'] = $id;
+      return $_SESSION['active_directory'] (JSON);
+    }
+
+    Attendre la réponse du backend
+    Traiter la réponse, notamment en utilisant .then(data)
+    const folderPath = response.json()
+    Transférer le path vers renderFileList(folderPath) en appelant cette fonction. (fichier renderFilesList.js)
+
+    // Demander les contenus du dossier (dans function renderFileList(folderPath) JS) :
+    **Remarque : la fonction renderFileList est spécialement conçue pour le rendu des éléments HTML à afficher après le traitement de la réponse du serveur.
+    fetch l'url vers le fichier backend qui traite les requêtes de fileContents (fichier renderFilesList.php)
+    Envoyer le paramètre folderPath en tant que x-www-form-urlencoded via méthode POST
+
+     
+    // Traitement pour obtenir les fichiers du dossier (fichier renderFilesList.php)
+    if(isset($_POST['folderPath']))
+    $folderPath = $_POST['folderPath'];
+    // Check if $folderPath exists and is a folder with is_dir() before running these scripts
+    $files = 'SELECT * FROM files WHERE path LIKE % $folderPath_%'; (fetchASSOC)
+    
+    Return $files // Réponse JSON (listes des fichiers et dossiers contenus dans le dossier )
+  
+    // Traitement réponse JS dans renderFileList(folderPath)
+
+
+
+
+
+
+
+
+
+
+
+// SI UN UTILISATEUR PRIVATE VEUT UPLOADER DU CONTENU PUBLIC, il doit se déconnecter
+<!-- GET THE PARENT FOLDER OF ACTUAL FOLDER -->
+<?php
+function extractFolderSubFromEnd($str, $folderName)
+{
+  // Calcule la position de départ en comptant la longueur de $folderName et ajoutant 1
+  $startPosition = -strlen($folderName) - 1;
+
+  // Utilise substr pour extraire la sous-chaîne
+  $result = substr($str, $startPosition);
+
+  // Trouve la position du dernier caractère slash dans la sous-chaîne
+  $slashPosition = strrpos($result, '/');
+
+  // Si un caractère slash est trouvé, extrait la sous-chaîne après le dernier slash (excluant le slash), sinon, retourne une chaîne vide
+  $folderSub = ($slashPosition !== false) ? substr($result, $slashPosition + 1) : '';
+
+  return $folderSub;
+}
+
+// Exemple d'utilisation de la fonction
+$folderName = $_POST['folderName'];
+$folderSub = $_POST['folderSub'];
+$str = 'folderRoot/' . $folderSub . '/' . $folderName;
+
+$result = extractFolderSubFromEnd($str, $folderName);
+
+// Affiche le résultat
+echo $result;
+?>
+
+
+<!-- ARRAY CONTENANT LE CHEMIN COMPLET -->
+<!-- Chaque répértoire est un index -->
+<?php
+
+function extractDirectoriesFromPath($path)
+{
+  // Utilise explode pour diviser la chaîne en un tableau
+  $directories = explode('/', $path);
+
+  // Filtre les éventuels éléments vides (par exemple, le premier élément si la chaîne commence par '/')
+  $directories = array_filter($directories);
+
+  return $directories;
+}
+
+// Exemple d'utilisation de la fonction
+$folderName = $_POST['folderName'];
+$folderSub = $_POST['folderSub'];
+$str = 'folderRoot/' . $folderSub . '/' . $folderName;
+
+$directories = extractDirectoriesFromPath($str);
+
+// Affiche le résultat
+print_r($directories);
+
+?>

@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php require_once('scripts/php/admin/checkSession.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,12 +27,22 @@
 
     <!-- CONTENT body -->
     <main>
+      <?php if (isset($_POST['restartSession'])) {
+        session_unset();
+        session_destroy();
+        header('Location:/test.php');
+      } ?>
       <!-- sidebar -->
       <aside class="left">
+        <div class="delete-sesssion">
+          <form action="" method="post">
+            <input type="submit" name="restartSession" value="Restart Session">
+          </form>
+        </div>
         <div class="title">
           <h3>Access-Type :</h3>
         </div>
-        <div class="public access-type">
+        <div class="public access-type" onclick="backToRoot()">
           <div class="icon"></div>
           Public
         </div>
@@ -44,17 +54,14 @@
       <!-- main content -->
       <div class="right">
         <div class="navigation">
-          <div class="folder-name">
-            Website
+ <!--          <div class="folder-name" id="root" onclick="backToRoot()">
+            public /
           </div>
-          <!-- <div class="folder-name">
+          <div class="folder-name">
             <div class="arrow"></div>
             Folder 1
           </div>
-          <div class="folder-name">
-            <div class="arrow"></div>
-            Folder 2
-          </div> -->
+          -->
         </div>
         <!-- HEAD - TITLE FOR THE FILES LIST -->
         <div class="body">
@@ -63,6 +70,7 @@
             <div class="add-date">Date</div>
             <div class="actions-btns">Actions</div>
           </div>
+
           <!-- FILES LIST -->
           <div class="content">
             <?php require('singlefile.php'); ?>
@@ -96,9 +104,22 @@
         </div>
       </form>
     </div>
-    <script></script>
+    <script>
+      function actualPath() {
+        fetch('return_session_directory.php')
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);
+            return data;
+          })
+          .catch(error => {
+            console.error('Error :', error);
+          });
+      }
+    </script>
     <script src="scripts/js/Modals.js" defer></script>
     <script src="scripts/js/renderFilesList.js" async></script>
+    <script src="scripts/js/openFolder.js" async></script>
     <script src="scripts/js/createFolder.js" defer></script>
     <script src="scripts/js/deleteFolder.js" async></script>
     <script src="scripts/js/uploadFiles.js" async></script>
