@@ -27,7 +27,10 @@
 
     <!-- CONTENT body -->
     <main>
-      <?php if (isset($_POST['restartSession'])) {
+      <?php 
+      // This is for development purpose
+      // It delete all the session variables associated to the file
+      if (isset($_POST['restartSession'])) {
         session_unset();
         session_destroy();
         header('Location:/test.php');
@@ -54,7 +57,7 @@
       <!-- main content -->
       <div class="right">
         <div class="navigation">
- <!--          <div class="folder-name" id="root" onclick="backToRoot()">
+          <!--          <div class="folder-name" id="root" onclick="backToRoot()">
             public /
           </div>
           <div class="folder-name">
@@ -105,18 +108,10 @@
       </form>
     </div>
     <script>
-      function actualPath() {
-        fetch('return_session_directory.php')
-          .then(response => response.json())
-          .then(data => {
-            console.log(data);
-            return data;
-          })
-          .catch(error => {
-            console.error('Error :', error);
-          });
-      }
+
     </script>
+
+    <script src="scripts/js/actualPath.js"></script>
     <script src="scripts/js/Modals.js" defer></script>
     <script src="scripts/js/renderFilesList.js" async></script>
     <script src="scripts/js/openFolder.js" async></script>

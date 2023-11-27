@@ -330,6 +330,7 @@ main .right .actions .icon:hover {
 }
 .modal-container .rename-modal {
   width: 300px;
+  min-width: 320px;
   height: 100px;
   background-color: #fff;
   padding: 20px;

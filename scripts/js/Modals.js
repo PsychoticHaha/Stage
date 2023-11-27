@@ -8,13 +8,13 @@ const editModal = document.querySelector('.modal-container');
  * @param {string} [folderName=""] 
  * @param {string} [id=""] 
  */
-function toggleDeleteModal(id = "", folderName ="") {
+function toggleDeleteModal(id = "", folderName = "") {
   const folderId = id;
-  
+
   editModal.innerHTML = `
   <div class="rename-modal">
     <div class="rename-form" method="post">
-    <label for="new-name" class="title">Delete this folder and all its content ?</label>
+    <label for="new-name" class="title">Delete folder AND all its content ?</label>
       <div class="confirm-btns">
         <input type="submit" id="yes" onclick="deleteFolder('${folderId}', '${folderName}')" value="YES">
         <input type="reset" id="no" value="NO" onclick="toggleEditModal()">
@@ -43,10 +43,10 @@ function toggleEditModal() {
         </div>
         </form>
         </div>`;
-  
+
   cancelEditBtn = document.getElementById('cancel-edit');
   cancelEditBtn.addEventListener('click', toggleEditModal);
-  
+
   if (!editModal.classList.contains('show')) {
     editModal.classList.add('show');
     document.getElementById('new-name').focus();
@@ -58,9 +58,10 @@ function toggleEditModal() {
 /** 
 * This function render/create a context menu for each file in the files list
 */
-function renderMenu() {
-  const contextMenu = `
-  <div class="item download-file">
+function renderMenu(isFile) {
+  if (isFile == "on file") {
+    const contextMenu = `
+    <div class="item download-file">
     <div class="icon"></div>
     Download
   </div>
@@ -73,13 +74,29 @@ function renderMenu() {
   Rename
   </div>
   <div class="item create-folder" onclick="toggleCreateFolderModal()">
+  <div class="icon"></div>
+  Create a new folder
+  </div>`;
+    const _contextMenu = document.createElement('div');
+    _contextMenu.classList.add('one-context-menu');
+    _contextMenu.innerHTML = contextMenu;
+    return _contextMenu;
+  } else {
+    const contextMenu = `
+    <div class="item create-folder" onclick="toggleCreateFolderModal()">
     <div class="icon"></div>
     Create a new folder
-  </div>`;
-  const _contextMenu = document.createElement('div');
-  _contextMenu.classList.add('one-context-menu');
-  _contextMenu.innerHTML = contextMenu;
-  return _contextMenu;
+    </div>
+    <div class="item upload-file" onclick="toggleCreateFolderModal()">
+    <div class="icon"></div>
+    Upload files
+    </div>
+    `;
+    const _contextMenu = document.createElement('div');
+    _contextMenu.classList.add('one-context-menu');
+    _contextMenu.innerHTML = contextMenu;
+    return _contextMenu;
+  }
 }
 
 /** 

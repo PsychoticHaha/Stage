@@ -50,16 +50,16 @@ function isValidFolderName(str) {
 
 /**
  * Main API REQUEST for Folder Creating using FetchAPI
- */
+*/
 function createFolder() {
   const folderNameInput = document.querySelector('#folder-name'),
     folderName = folderNameInput.value;
   if (isValidFolderName(folderName)) {
     const url = './../scripts/php/public/createFolder.php';
-  
+
     const formData = new URLSearchParams();
     formData.append('folderName', folderName);
-  
+
     // Configure request object
     const options = {
       method: 'POST',
@@ -68,24 +68,28 @@ function createFolder() {
       },
       body: formData
     };
-  
-    // Send request to the URL
+    // Send request to the backend to create the physical folder and store it information into database
     fetch(url, options)
       .then(response => response.json())
-      .then(data => {
+      .then(async data => {
         console.log('Server Response :', data);
         if (data === "Folder Created") {
           // Show success message
           renderPopupMsg('success', 'Folder created successfully');
           folderNameInput.value = '';
           toggleCreateFolderModal();
-          renderFileList(actualPath());
-  
+
+          const currentPath = await actualPath();
+          // Replace backslashes into slashes
+          const pathToRender = currentPath.replace(/\\/g, '/');
+          // Render the new content of the open folder
+          renderFileList(pathToRender);
+
         } else if (data === "Folder Already exists") {
           // Show error message
           renderPopupMsg('error', 'This Folder Already exists, Choose another name');
         }
-  
+
       })
       .catch(error => {
         console.error('Error :', error);

@@ -19,6 +19,7 @@ if (isset($_POST['fileId'])) {
       $_SESSION['active_directory'] = $fullPath . '';
       $_SESSION['file_id'] = $id;
 
+
     }
     header('Content-Type: application/json');
     echo json_encode($fullPath);

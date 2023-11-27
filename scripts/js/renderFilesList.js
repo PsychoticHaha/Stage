@@ -36,7 +36,7 @@ function renderFileList(folderPath) {
       FileListDiv.innerHTML = '';
       // Log into the console the actual Open Directory
       // actualPath();
-
+      
         for (let i = 0; i < data.length; i++) {
           // Check if it's an empty directory
           // It should show the name of the last folder (tree) in the navigation Menu (NOT FINISHED YET)
@@ -113,7 +113,7 @@ function renderFileList(folderPath) {
               // Check if there is an existing context menu
               if (contextMenuDiv) {
                 contextMenuDiv.remove();
-                file.appendChild(renderMenu());
+                file.appendChild(renderMenu('on file'));
                 const contextMnuDiv = document.querySelector('.one-context-menu');
                 contextMnuDiv.style = `top:${mouseY + 10}px;left:${mouseX + 10}px`;
                 if (newFolder_Menu_Btn) { // This if statement is optional, I think
@@ -122,14 +122,19 @@ function renderFileList(folderPath) {
                   })
                 }
               } else {
-                file.appendChild(renderMenu());
+                file.appendChild(renderMenu('on file'));
                 const contextMnuDiv = document.querySelector('.one-context-menu');
                 contextMnuDiv.style = `top:${mouseY + 10}px;left:${mouseX + 10}px`;
               }
 
               // These are event Handlers for the contextMenu Options
               const renameBtnContextMenu = document.querySelector('.single-file .item.rename-file'),
-                deleteBtnMenu = document.querySelector('.single-file .item.delete-file');
+                deleteBtnMenu = document.querySelector('.single-file .item.delete-file'),
+                fileListContainer = document.querySelector('.right div.body');
+              fileListContainer.addEventListener('click', removeMenu);
+              fileListContainer.addEventListener('contextmenu', (event) => {
+                event.preventDefault();
+              })
 
               renameBtnContextMenu.addEventListener('click', () => {
                 toggleEditModal();

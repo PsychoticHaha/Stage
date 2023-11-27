@@ -44,7 +44,7 @@ if (isset($_POST['folderName']) && !empty($_SESSION['active_directory'])) {
         $stmt->bindParam(':user_id', $user_id);
         $stmt->execute();
         mkdir($path, 0777);
-
+        
         header('Content-Type: application/json');
         echo json_encode('Folder Created');
       } else {

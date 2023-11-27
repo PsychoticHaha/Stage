@@ -5,15 +5,17 @@ try {
     // Setting the id, path and folder name for physical delete
     $folder_id = $_POST['folderId'];
     $folderName = $_POST['folderName'];
-    $path = $_SERVER['DOCUMENT_ROOT'] . '/files/public/' . $folderName .'/';
+    $path = $_SESSION['active_directory'] . $folderName .'/';
 
     // Deleting from the database
     $sql = 'DELETE FROM files WHERE id=:id';
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':id', $folder_id);
     $stmt->execute();
+
     // Deleting physically
-    deleteFolder($path);
+    $windowsPath = str_replace('/', '\\', $path);
+    deleteFolder($windowsPath);
     header('Content-Type: application/json');
     echo json_encode('Folder Deleted');
   }
@@ -24,7 +26,11 @@ try {
 
 ?>
 <?php
-
+/**
+ * This function delete the physical folder
+ * @param string $path
+ * @return void
+ */
 function deleteFolder($path)
 {
   // Check if the path is a directory

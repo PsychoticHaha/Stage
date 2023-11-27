@@ -1,3 +1,8 @@
+/**
+ * This function send the delete request to the backend
+ * @param int folderId 
+ * @param string folderName 
+ */
 function deleteFolder(folderId, folderName) {
   const folder = document.getElementById(folderId);
 
@@ -13,11 +18,11 @@ function deleteFolder(folderId, folderName) {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
-    body: formData // Use encoded data
+    body: formData 
   };
 
   fetch(url, options)
-    .then(response => response.json()) // Convert response into JSON
+    .then(response => response.json())
     .then(data => {
       console.log('Server Response :', JSON.stringify(data));
       if (data == 'Folder Deleted') {
