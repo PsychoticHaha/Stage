@@ -50,19 +50,21 @@ function renderFileList(folderPath) {
               folder_id = element.id,
               folderName = element.name,
               folderPath = element.path,
+              category = element.category,
               date = element.date;
 
             FileListDiv.innerHTML += `
             <div class="single-file" id="${folder_id}">
               <div class="name">
                 <input type="checkbox" class="check" name="" id="">
+                <span class="category ${category}"></span>
                 <span class="folder-name" id="${folder_id + 1818}" ondblclick="openFolder('${folderName}','${folder_id}')">${folderName}</span>
               </div>
               <div class="add-date">
                 ${date}
               </div>
               <div class="file-action">
-                <div class="rename one-file" title="Rename"></div>
+                <div class="rename one-file" onclick="toggleEditModal(${folder_id})" title="Rename"></div>
                 <div class="delete one-file" onclick="toggleDeleteModal(${folder_id}, '${folderName}')" title="Delete"></div>
                 <div class="download one-file" title="Download"></div>
             </div>
@@ -71,12 +73,7 @@ function renderFileList(folderPath) {
 
 
           // Declare the Actions buttons and one Single File in the file List
-          const editBtns = document.querySelectorAll('.single-file .rename.one-file'),
-            files = document.querySelectorAll('.single-file');
-          // Actions for the edit and Delete Buttons
-          editBtns.forEach(editBtn => {
-            editBtn.addEventListener('click', toggleEditModal);
-          });
+          const files = document.querySelectorAll('.single-file');
 
           // Create a context Menu for each single File in the file list
           files.forEach(file => {
@@ -107,22 +104,17 @@ function renderFileList(folderPath) {
               const Position = renderPosition(),
                 mouseX = Position[0],
                 mouseY = Position[1];
-              const contextMenuDiv = document.querySelector('.one-context-menu'),
-                newFolder_Menu_Btn = document.querySelector('.one-context-menu .delete.one-file');
+              const contextMenuDiv = document.querySelector('.one-context-menu');
 
               // Check if there is an existing context menu
               if (contextMenuDiv) {
                 contextMenuDiv.remove();
-                file.appendChild(renderMenu('on file'));
+                file.appendChild(renderMenu());
                 const contextMnuDiv = document.querySelector('.one-context-menu');
                 contextMnuDiv.style = `top:${mouseY + 10}px;left:${mouseX + 10}px`;
-                if (newFolder_Menu_Btn) { // This if statement is optional, I think
-                  newFolder_Menu_Btn.addEventListener('click', () => {
-                    toggleCreateFolderModal();
-                  })
-                }
+
               } else {
-                file.appendChild(renderMenu('on file'));
+                file.appendChild(renderMenu());
                 const contextMnuDiv = document.querySelector('.one-context-menu');
                 contextMnuDiv.style = `top:${mouseY + 10}px;left:${mouseX + 10}px`;
               }
@@ -137,12 +129,12 @@ function renderFileList(folderPath) {
               })
 
               renameBtnContextMenu.addEventListener('click', () => {
-                toggleEditModal();
+                toggleEditModal(parseInt(deleteBtnMenu.parentElement.parentElement.id), (deleteBtnMenu.parentElement.parentElement.firstElementChild.firstElementChild.nextElementSibling.innerHTML).toString());
                 removeMenu();
               });
 
               deleteBtnMenu.addEventListener('click', () => {
-                toggleDeleteModal(parseInt(deleteBtnMenu.parentElement.parentElement.id), (deleteBtnMenu.parentElement.parentElement.firstElementChild.firstElementChild.nextElementSibling.innerHTML).toString());
+                toggleDeleteModal(parseInt(deleteBtnMenu.parentElement.parentElement.id), (deleteBtnMenu.parentElement.parentElement.firstElementChild.firstElementChild.nextElementSibling.nextElementSibling.innerHTML).toString());
                 removeMenu();
               });
 

@@ -5,7 +5,7 @@ const uploadBtn = document.querySelector('.actions .icon.upload'),
 filesInput.addEventListener('change', displaySelectedFiles);
 
 function displaySelectedFiles() {
-  fileListDiv.innerHTML = '';
+  fileListDiv.innerHTML = ''; 
 
   for (let i = 0; i < filesInput.files.length; i++) {
     const fileName = filesInput.files[i].name;

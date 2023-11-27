@@ -37,11 +37,15 @@
       } ?>
       <!-- sidebar -->
       <aside class="left">
+        
+      <!-- DELETE THIS IN PRODUCTION -->
         <div class="delete-sesssion">
           <form action="" method="post">
             <input type="submit" name="restartSession" value="Restart Session">
           </form>
         </div>
+        <!-- END OF SHOULD BE DELETED -->
+
         <div class="title">
           <h3>Access-Type :</h3>
         </div>
@@ -116,6 +120,7 @@
     <script src="scripts/js/renderFilesList.js" async></script>
     <script src="scripts/js/openFolder.js" async></script>
     <script src="scripts/js/createFolder.js" defer></script>
+    <script src="scripts/js/renameFolder.js" async></script>
     <script src="scripts/js/deleteFolder.js" async></script>
     <script src="scripts/js/uploadFiles.js" async></script>
     <script src="scripts/js/common.js" defer></script>

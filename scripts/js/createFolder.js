@@ -1,44 +1,3 @@
-// Event handler for the create Folder Buttons
-const newFolderBtn = document.querySelector('.actions .new-folder');
-newFolderBtn.addEventListener('click', () => {
-  toggleCreateFolderModal();
-})
-
-
-/**
- * This function Show / Hide the "Name" Prompt for the new folder
- */
-function toggleCreateFolderModal() {
-  editModal.innerHTML =
-    `<div class="rename-modal">
-    <form id="createFolder" class="rename-form">
-      <label for="folder-name" class="title">Name of the new folder :</label>
-      <input type="text" id="folder-name" class="new-name" name="folderName" value="">
-      <div class="btns">
-        <input type="submit" id="ok" value="Create">
-        <input type="reset" id="cancel-edit" value="Cancel">
-      </div>
-    </form>
-  </div>`;
-  if (!editModal.classList.contains('show')) {
-    editModal.classList.add('show');
-    document.getElementById('folder-name').focus();
-  } else {
-    editModal.classList.remove('show');
-  }
-  // Cancel Event Handler
-  cancelEditBtn = document.getElementById('cancel-edit');
-  cancelEditBtn.addEventListener('click', toggleEditModal);
-
-  // Create Folder Button event handler
-  const createFolderForm = document.getElementById('createFolder');
-  createFolderForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    createFolder();
-  });
-}
-
-
 /** 
  * Check if the folder name is a valid name using REGEX
  * */
@@ -68,11 +27,10 @@ function createFolder() {
       },
       body: formData
     };
-    // Send request to the backend to create the physical folder and store it information into database
+    // Send request to the backend to create the physical folder and store its information into database
     fetch(url, options)
       .then(response => response.json())
       .then(async data => {
-        console.log('Server Response :', data);
         if (data === "Folder Created") {
           // Show success message
           renderPopupMsg('success', 'Folder created successfully');

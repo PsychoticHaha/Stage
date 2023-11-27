@@ -15,7 +15,6 @@
       $main_path = 'files/public/';
       $contents = scandir($main_path);
       if ($contents) {
-        var_dump($contents);
         foreach ($contents as $element) {
           if ($element != '.' && $element != '..') {
             $elementPath = $main_path . '/' . $element;
@@ -35,7 +34,15 @@
         echo 'no content';
       }
     }
-    fetchFolderContent();
+    $newTestFolder = dirname(__DIR__) . '\\Stage\\test renamed';
+    function renameFileORFolder()
+    {
+      fetchFolderContent();
+      var_dump((dirname(__DIR__)));
+      $testFolder = dirname(__DIR__) . '\\Stage\\test';
+      // rename($testFolder, $newTestFolder);
+    }
+    var_dump(is_dir($newTestFolder . '\\'));
     ?>
 
   </body>

@@ -21,3 +21,8 @@ Dans le contexte de votre application semblable à Google Drive pour votre mémo
    - Comment rendre l'application accessible à tous les utilisateurs, y compris ceux ayant des besoins spécifiques en termes d'accessibilité, afin de promouvoir l'inclusion ?
 
 Choisissez une problématique qui suscite votre intérêt et qui est pertinente pour le domaine de votre application. Assurez-vous que votre problématique est clairement définie et spécifique, de manière à orienter votre recherche et à fournir une réponse substantielle dans votre mémoire.
+
+
+
+Idée pour une future mise à jour du projet : 
+Permettre le déplacement de fichier ou dossier.

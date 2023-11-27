@@ -2,22 +2,24 @@
 require_once('../pdo.php');
 try {
   if (isset($_POST['folderId']) && isset($_POST['folderName'])) {
-    // Setting the id, path and folder name for physical delete
     $folder_id = $_POST['folderId'];
     $folderName = $_POST['folderName'];
-    $path = $_SESSION['active_directory'] . $folderName .'/';
+    if ($folderName != '') {
+      // Setting the path and folder name for physical delete
+      $path = $_SESSION['active_directory'] . $folderName . '/';
 
-    // Deleting from the database
-    $sql = 'DELETE FROM files WHERE id=:id';
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':id', $folder_id);
-    $stmt->execute();
+      // Deleting from the database
+      $sql = 'DELETE FROM files WHERE id=:id';
+      $stmt = $pdo->prepare($sql);
+      $stmt->bindParam(':id', $folder_id);
+      $stmt->execute();
 
-    // Deleting physically
-    $windowsPath = str_replace('/', '\\', $path);
-    deleteFolder($windowsPath);
-    header('Content-Type: application/json');
-    echo json_encode('Folder Deleted');
+      // Deleting physically
+      $windowsPath = str_replace('/', '\\', $path);
+      deleteFolder($windowsPath);
+      header('Content-Type: application/json');
+      echo json_encode('Folder Deleted');
+    }
   }
 } catch (PDOException $e) {
   header('Content-Type: application/json');

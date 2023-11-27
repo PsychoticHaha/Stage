@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `files` (
   `access_type` varchar(7) NOT NULL,
   `category` varchar(6) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
-  `type` int(11) DEFAULT NULL,
+  `type` varchar(11) DEFAULT NULL,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES users(id)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;

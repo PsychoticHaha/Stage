@@ -34,7 +34,8 @@ if (isset($_POST['folderName']) && !empty($_SESSION['active_directory'])) {
     $category = 'folder';
     try {
       if (!is_dir($path)) {
-        $sql = 'INSERT INTO files(name, path, rootContent, access_type, category, user_id) VALUES (:_name, :_path, :rootContent, :access_type, :category, :user_id)';
+        $fileType = 'folder';
+        $sql = 'INSERT INTO files(name, path, rootContent, access_type, category, user_id, type) VALUES (:_name, :_path, :rootContent, :access_type, :category, :user_id, :type)';
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':_name', $folderName);
         $stmt->bindParam(':_path', $path);
@@ -42,6 +43,7 @@ if (isset($_POST['folderName']) && !empty($_SESSION['active_directory'])) {
         $stmt->bindParam(':access_type', $access_type);
         $stmt->bindParam(':category', $category);
         $stmt->bindParam(':user_id', $user_id);
+        $stmt->bindParam(':type', $fileType);
         $stmt->execute();
         mkdir($path, 0777);
         
