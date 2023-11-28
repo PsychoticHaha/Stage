@@ -14,9 +14,9 @@ if (isset($_POST['fileId'])) {
       $folderName = $info['name'];
       // fullPath containing slashes
       $fullPath = $info['path'];
-      $fullPath = str_replace('/', '\\', $fullPath);
+      $fullPath = str_replace('/', DIRECTORY_SEPARATOR, $fullPath);
       // SET the sessions active_directory and folder_id (The last backslash is for avoiding to get the actual folder inside itself)
-      $_SESSION['active_directory'] = $fullPath . '';
+      $_SESSION['active_directory'] = $fullPath;
       $_SESSION['file_id'] = $id;
 
 

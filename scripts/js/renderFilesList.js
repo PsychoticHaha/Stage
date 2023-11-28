@@ -26,39 +26,38 @@ function renderFileList(folderPath) {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
-    body: formData 
+    body: formData
   };
 
   // Fecth the file Lists 
   fetch(url, options)
     .then(response => response.json())
-    .then(data => {
+    .then(async dat => {
+      const data = await dat;
       FileListDiv.innerHTML = '';
-      // Log into the console the actual Open Directory
-      // actualPath();
-      
-        for (let i = 0; i < data.length; i++) {
-          // Check if it's an empty directory
-          // It should show the name of the last folder (tree) in the navigation Menu (NOT FINISHED YET)
-          if (data.length < 1) {
-            const navigationDiv = document.querySelector('.right .navigation');
-            navigationDiv.innerHTML = ``;
-            FileListDiv.innerHTML = `<h2 style="margin:40px 0 0 20px">Empty Directory</h2>`;
-          } else {
-            // Create single file elements and show data in the page
-            const element = data[i],
-              folder_id = element.id,
-              folderName = element.name,
-              folderPath = element.path,
-              category = element.category,
-              date = element.date;
 
-            FileListDiv.innerHTML += `
+      // Check if it's an empty directory
+      // It should show the name of the last folder (tree) in the navigation Menu (NOT FINISHED YET)
+      if (data.length < 1) {
+        const navigationDiv = document.querySelector('.right .navigation');
+        // navigationDiv.innerHTML = ``;
+        FileListDiv.innerHTML = `<h2 style="margin:40px 0 0 20px">Empty Directory</h2>`;
+      } else {
+        for (let i = 0; i < data.length; i++) {
+          // Create single file elements and show data in the page
+          const element = data[i],
+            folder_id = element.id,
+            folderName = element.name,
+            folderPath = element.path,
+            category = element.category,
+            date = element.date;
+
+          FileListDiv.innerHTML += `
             <div class="single-file" id="${folder_id}">
               <div class="name">
                 <input type="checkbox" class="check" name="" id="">
                 <span class="category ${category}"></span>
-                <span class="folder-name" id="${folder_id + 1818}" ondblclick="openFolder('${folderName}','${folder_id}')">${folderName}</span>
+                <span class="folder-name" id="${folder_id + 181818}" ondblclick="openFolder('${folderName}','${folder_id}','${category}')">${folderName}</span>
               </div>
               <div class="add-date">
                 ${date}
@@ -69,7 +68,6 @@ function renderFileList(folderPath) {
                 <div class="download one-file" title="Download"></div>
             </div>
           </div>`;
-          }
 
 
           // Declare the Actions buttons and one Single File in the file List
@@ -141,7 +139,8 @@ function renderFileList(folderPath) {
             });
           })
         }
-      
+      }
+
     })
     .catch(error => {
       console.error('Error :', error);

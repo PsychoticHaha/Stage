@@ -179,7 +179,7 @@ main .right .body .content .single-file .category {
   width: 30px;
   height: 30px;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 80%;
   background-position: 50% 50%;
 }
 main .right .body .content .single-file .category.folder {

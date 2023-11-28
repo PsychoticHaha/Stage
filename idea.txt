@@ -1,0 +1,11 @@
+Bug in file upload : 
+  ???? ANy bug
+
+Error when deleting files : 
+  Folders can be deleted successfully
+  The files are deleted from database but not deleted physically :: check for any error in is_file or is_dir check
+
+
+(Deployed)Error occured returned by online renaming :: Check permissions on server
+
+PROCESS TO FILE OPENING in openFolder.js:42

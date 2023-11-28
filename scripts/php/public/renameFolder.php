@@ -16,9 +16,9 @@ if (isset($_POST['newName']) && isset($_POST['id']) && !empty($_SESSION['on_plat
 
     foreach ($folder as $value) {
       // Physical path of the file to rename
-      $physicalPath = str_replace('/', '\\', $_SESSION['active_directory'] . $value['name']);
+      $physicalPath = str_replace('/', DIRECTORY_SEPARATOR, $_SESSION['active_directory'] . $value['name']);
       if (is_dir($physicalPath)) {
-        $newPath = $_SESSION['active_directory'] . $newFolderName . '\\';
+        $newPath = $_SESSION['active_directory'] . $newFolderName . DIRECTORY_SEPARATOR;
       } else {
         $newPath = $_SESSION['active_directory'] . $newFolderName;
       }
@@ -27,6 +27,7 @@ if (isset($_POST['newName']) && isset($_POST['id']) && !empty($_SESSION['on_plat
       if (!is_dir($newPath) || !is_file($newPath)) {
         // rename it using rename()
         if (rename($physicalPath, $newPath)) {
+          // Change backslash into slash (if exists)
           $pathToSave = str_replace('\\', '/', $newPath);
           $query = 'UPDATE files SET name=:name,path=:path WHERE id=:id';
           $nStmt = $pdo->prepare($query);

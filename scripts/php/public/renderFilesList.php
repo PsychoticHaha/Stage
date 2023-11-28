@@ -13,7 +13,7 @@ try {
 
     } else {
       $fullPath = $_POST['folderPath'];
-      // $fullPath = $_SESSION['active_directory'];
+      // $fullPath = $_SESSION['active_directory']; // This is unecessary since $_POST folderPath contain the $_SESSION['active_directory'] value itself
 
       // Get every subfolders and files inside this directory using scandir()
       if (!is_dir($fullPath)) {
@@ -34,16 +34,18 @@ try {
         $fileList = array();
         // Render an array containing the files and subfolders list
         for ($i = 0; $i < count($subfolders); $i++) {
-          $fullPath = $_POST['folderPath'] . $subfolders[$i] . '\\';
-          $fullPath = str_replace('\\', '/', $fullPath);
+          $physicalPath = $_POST['folderPath'] . $subfolders[$i] . DIRECTORY_SEPARATOR;
+
+          // Change backslashes into slashes (if exists) because we'll select from DB
+          $dbPath = str_replace('\\', '/', $physicalPath);
 
           $sql = 'SELECT * FROM files WHERE path =:fullPath';
           $stmt = $pdo->prepare($sql);
-          $stmt->bindParam(':fullPath', $fullPath);
+          $stmt->bindParam(':fullPath', $dbPath);
           $stmt->execute();
           $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
           foreach ($response as $value) {
-            // You can process for data filtering here
+            // You can process for data filtering here, before returning $fileList
             $fileList[] = $value;
           }
 

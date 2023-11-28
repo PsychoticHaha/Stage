@@ -100,7 +100,7 @@
     <!-- FILES Upload MODAL -->
     <div class="modal-upload">
       <form id="uploadForm">
-        <input type="file" name="files[]" id="filesInput" multiple style="display:none">
+        <input type="file" name="files[]" id="filesInput" multiple style="visibility:none">
         <h3>Selected files :</h3>
         <div class="selected-files-list">
 

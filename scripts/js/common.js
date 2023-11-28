@@ -65,6 +65,6 @@ function backToRoot() {
     public /
   </div>
   `;
-  openFolder('public /', 1);
+  openFolder('public /', 1,'folder');
   renderRootFileList();
 };

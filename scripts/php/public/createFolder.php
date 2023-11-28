@@ -13,7 +13,7 @@ if (isset($_POST['folderName']) && !empty($_SESSION['active_directory'])) {
   $folderName = $_POST['folderName'];
 
   // Check if it's directly in the Root folder
-  if ($parentDirectory == dirname(__DIR__).'\\'.'..\\..\\files\\public\\') {
+  if ($parentDirectory == dirname(__DIR__) . DIRECTORY_SEPARATOR . '..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'files'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR) {
     $rootContent = 1;
   } else {
     $rootContent = 0;
@@ -22,7 +22,8 @@ if (isset($_POST['folderName']) && !empty($_SESSION['active_directory'])) {
   // Check if it's a valid filename
   if (isValidFolderName($folderName)) {
     // Set the path to save
-    $path = $parentDirectory . $folderName .'\\';
+    $path = $parentDirectory . $folderName .DIRECTORY_SEPARATOR;
+     // Change backslash into slash (if exists) because we'll save it to DB
     $path = str_replace('\\', '/', $path);
     if (!empty($_SESSION['private'])) {
       $access_type = 'private'; // Don't forget to set this session variable when login as private

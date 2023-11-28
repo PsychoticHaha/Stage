@@ -2,10 +2,10 @@
  * This function send the delete request to the backend
  * @param int folderId 
  * @param string folderName 
- */
+ */ 
 function deleteFolder(folderId, folderName) {
   const folder = document.getElementById(folderId);
-  if (folderId && folderName) {
+  if (folderId && folderName && folderName != '') {
     const url = '/scripts/php/public/deleteFolder.php';
     // Défine data to send (parameters)
     const formData = new URLSearchParams();
@@ -23,11 +23,19 @@ function deleteFolder(folderId, folderName) {
 
     fetch(url, options)
       .then(response => response.json())
-      .then(data => {
-        if (data == 'Folder Deleted') {
+      .then(async data => {
+        if (data == 'Deleted') {
           toggleEditModal();//This work since the container is selected instead of the content
-          folder.remove();
-          renderPopupMsg('success', '<b> Success</b> : Folder Deleted !');
+          
+          const currentPath = await actualPath();
+          // Replace backslashes into slashes
+          const pathToRender = currentPath.replace(/\\/g, '/');
+          // Render the new content of the open folder
+          renderFileList(pathToRender);
+
+          renderPopupMsg('success', '<b> Success :</b> Deleted !');
+        } else {
+          renderPopupMsg('error', data);
         }
       })
       .catch(error => {

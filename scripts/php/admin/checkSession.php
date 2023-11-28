@@ -1,7 +1,8 @@
 <?php
 require_once('./scripts/php/pdo.php');
 if (empty($_SESSION['active_directory'])) {
-  $_SESSION['active_directory'] = dirname(__DIR__) . '\\' . '..\\..\\files\\public\\';
+  $_SESSION['active_directory'] = dirname(__DIR__) . DIRECTORY_SEPARATOR . '..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'files'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR;
+   // Change backslash into slash (if exists) because we'll always use slash inside DB
   $active_directory = str_replace('\\', '/', $_SESSION['active_directory'] );
 
   $sql = 'SELECT * FROM files WHERE path = :active_directory';
